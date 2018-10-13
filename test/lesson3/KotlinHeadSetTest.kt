@@ -2,7 +2,8 @@ package lesson3
 
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Tag
-import kotlin.test.Test
+import org.junit.jupiter.api.Test
+//import kotlin.test.Test
 
 class KotlinHeadSetTest : AbstractHeadTailTest() {
 

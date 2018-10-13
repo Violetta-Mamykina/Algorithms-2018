@@ -2,7 +2,9 @@ package lesson7.genetic
 
 import lesson5.Graph
 import lesson5.impl.GraphBuilder
+import org.junit.Ignore
 import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 import kotlin.test.*
 import java.util.*
 

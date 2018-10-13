@@ -1,7 +1,8 @@
 package lesson2
 
 import org.junit.jupiter.api.Tag
-import kotlin.test.Test
+import org.junit.jupiter.api.Test
+//import kotlin.test.Test
 
 class AlgorithmsTestsJava : AbstractAlgorithmsTests() {
     @Test

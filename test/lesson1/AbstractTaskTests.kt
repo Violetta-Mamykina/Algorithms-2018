@@ -44,7 +44,7 @@ abstract class AbstractTaskTests : AbstractFileTests() {
     protected fun sortAddresses(sortAddresses: (String, String) -> Unit) {
         // TODO: large test
         try {
-            sortAddresses("input/addr_in1.txt", "temp.txt")
+            sortAddresses("Algorithms-2018/input/addr_in1.txt", "temp.txt")
             assertFileContent("temp.txt",
                     """
                     Железнодорожная 3 - Петров Иван
@@ -83,7 +83,7 @@ abstract class AbstractTaskTests : AbstractFileTests() {
 
     protected fun sortTemperatures(sortTemperatures: (String, String) -> Unit) {
         try {
-            sortTemperatures("input/temp_in1.txt", "temp.txt")
+            sortTemperatures("Algorithms-2018/input/temp_in1.txt", "temp.txt")
             assertFileContent("temp.txt",
                     """
                     -98.4
