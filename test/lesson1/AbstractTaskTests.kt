@@ -44,7 +44,7 @@ abstract class AbstractTaskTests : AbstractFileTests() {
     protected fun sortAddresses(sortAddresses: (String, String) -> Unit) {
         // TODO: large test
         try {
-            sortAddresses("Algorithms-2018/input/addr_in1.txt", "temp.txt")
+            sortAddresses("input/addr_in1.txt", "temp.txt")
             assertFileContent("temp.txt",
                     """
                     Железнодорожная 3 - Петров Иван
@@ -83,7 +83,7 @@ abstract class AbstractTaskTests : AbstractFileTests() {
 
     protected fun sortTemperatures(sortTemperatures: (String, String) -> Unit) {
         try {
-            sortTemperatures("Algorithms-2018/input/temp_in1.txt", "temp.txt")
+            sortTemperatures("input/temp_in1.txt", "temp.txt")
             assertFileContent("temp.txt",
                     """
                     -98.4
@@ -119,7 +119,7 @@ abstract class AbstractTaskTests : AbstractFileTests() {
     protected fun sortSequence(sortSequence: (String, String) -> Unit) {
         // TODO: large test
         try {
-            sortSequence("Algorithms-2018/input/seq_in1.txt", "temp.txt")
+            sortSequence("input/seq_in1.txt", "temp.txt")
             assertFileContent("temp.txt",
                     """
                         1
@@ -134,7 +134,7 @@ abstract class AbstractTaskTests : AbstractFileTests() {
             File("temp.txt").delete()
         }
         try {
-            sortSequence("Algorithms-2018/input/seq_in2.txt", "temp.txt")
+            sortSequence("input/seq_in2.txt", "temp.txt")
             assertFileContent("temp.txt",
                     """
                         25
@@ -151,7 +151,7 @@ abstract class AbstractTaskTests : AbstractFileTests() {
             File("temp.txt").delete()
         }
         try {
-            sortSequence("Algorithms-2018/input/seq_in3.txt", "temp.txt")
+            sortSequence("input/seq_in3.txt", "temp.txt")
             assertFileContent("temp.txt",
                     """
                         15
