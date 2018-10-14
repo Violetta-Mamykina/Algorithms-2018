@@ -5,6 +5,7 @@ import kotlin.NotImplementedError;
 import java.io.*;
 import java.util.*;
 
+@SuppressWarnings("unused")
 public class JavaTasks {
     /**
      * Сортировка времён
