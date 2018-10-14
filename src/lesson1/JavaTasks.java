@@ -3,9 +3,7 @@ package lesson1;
 import kotlin.NotImplementedError;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class JavaTasks {
     /**
@@ -147,9 +145,46 @@ public class JavaTasks {
      * 2
      * 2
      */
-    static public void sortSequence(String inputName, String outputName) {
-        throw new NotImplementedError();
+    static public void sortSequence(String inputName, String outputName) throws IOException {
+        Map<String, Integer> numbers = new HashMap<>();
+        String lineOfNumbers;
+        String lineOfNumbers2;
+        int count;
+        int maxCount = 0;
+        String maxNumber = "";
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(inputName))) {
+            while ((lineOfNumbers = bufferedReader.readLine()) != null) {
+                if (numbers.containsKey(lineOfNumbers)) {
+                    count = numbers.get(lineOfNumbers);
+                    count++;
+                    numbers.put(lineOfNumbers, count);
+                } else {
+                    numbers.put(lineOfNumbers, 0);
+                }
+            }
+        }
+        for (Map.Entry<String, Integer> compareNumbers : numbers.entrySet()) {
+            if (compareNumbers.getValue() > maxCount) {
+                maxCount = compareNumbers.getValue();
+                maxNumber = compareNumbers.getKey();
+            }
+        }
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(outputName));
+        try (BufferedReader bufferedReader2 = new BufferedReader(new FileReader(inputName))) {
+            while ((lineOfNumbers2 = bufferedReader2.readLine()) != null) {
+                if (!lineOfNumbers2.equals(maxNumber)) {
+                    bufferedWriter.write(lineOfNumbers2);
+                    bufferedWriter.newLine();
+                }
+            }
+            for (int i = 0; i <= maxCount; i++) {
+                bufferedWriter.write(maxNumber);
+                bufferedWriter.newLine();
+            }
+        }
+        bufferedWriter.close();
     }
+
 
     /**
      * Соединить два отсортированных массива в один

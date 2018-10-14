@@ -119,7 +119,7 @@ abstract class AbstractTaskTests : AbstractFileTests() {
     protected fun sortSequence(sortSequence: (String, String) -> Unit) {
         // TODO: large test
         try {
-            sortSequence("input/seq_in1.txt", "temp.txt")
+            sortSequence("Algorithms-2018/input/seq_in1.txt", "temp.txt")
             assertFileContent("temp.txt",
                     """
                         1
@@ -134,7 +134,7 @@ abstract class AbstractTaskTests : AbstractFileTests() {
             File("temp.txt").delete()
         }
         try {
-            sortSequence("input/seq_in2.txt", "temp.txt")
+            sortSequence("Algorithms-2018/input/seq_in2.txt", "temp.txt")
             assertFileContent("temp.txt",
                     """
                         25
@@ -147,6 +147,26 @@ abstract class AbstractTaskTests : AbstractFileTests() {
                         12
                         12
                     """.trimIndent())
+        } finally {
+            File("temp.txt").delete()
+        }
+        try {
+            sortSequence("Algorithms-2018/input/seq_in3.txt", "temp.txt")
+            assertFileContent("temp.txt",
+                    """
+                        15
+                        15
+                        15
+                        28
+                        28
+                        28
+                        39
+                        39
+                        39
+                        11
+                        11
+                        11
+                        """.trimIndent())
         } finally {
             File("temp.txt").delete()
         }
