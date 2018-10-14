@@ -1,12 +1,13 @@
 package lesson7.genetic
 
+import jdk.nashorn.internal.ir.annotations.Ignore
 import lesson5.Graph
 import lesson5.impl.GraphBuilder
-import org.junit.Ignore
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
-import kotlin.test.*
 import java.util.*
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class GeneticVoyagingPathSearcherTest {
     @Test
