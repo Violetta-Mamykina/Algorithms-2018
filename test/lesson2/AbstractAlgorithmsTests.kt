@@ -66,6 +66,9 @@ abstract class AbstractAlgorithmsTests {
         assertEquals(50000000, josephTask(50000000, 1))
         assertEquals(3, josephTask(8, 5))
         assertEquals(28, josephTask(40, 3))
+        assertEquals(1, josephTask(1, 5))
+        assertEquals(11616028, josephTask(13000000, 40))
+        assertEquals(4, josephTask(5, 6))
         var menNumber = 2
         for (i in 1..20) {
             assertEquals(1, josephTask(menNumber, 2))
@@ -77,6 +80,31 @@ abstract class AbstractAlgorithmsTests {
         assertEquals("", longestCommonSubstring("мой мир", "я"))
         assertEquals("зд", longestCommonSubstring("здравствуй мир", "мы здесь"))
         assertEquals("СЕРВАТОР", longestCommonSubstring("ОБСЕРВАТОРИЯ", "КОНСЕРВАТОРЫ"))
+        assertEquals("0018 ", longestCommonSubstring ("0018 12 1998 2000", "0018 06 2000 1998"))
+        assertEquals("Don't let them ", longestCommonSubstring("Don't let them in", "Don't let them see"))
+        assertEquals("GOOD G", longestCommonSubstring("Be the GOOD GIRL you always have to be", "GOOD Girl"))
+        assertEquals(" черт", longestCommonSubstring(
+               """
+Ниоткуда с любовью, надцатого мартобря,
+дорогой, уважаемый, милая, но неважно
+даже кто, ибо черт лица, говоря
+откровенно, не вспомнить, уже не ваш, но
+и ничей верный друг вас приветствует с одного
+из пяти континентов, держащегося на ковбоях;
+                """.trimIndent(),
+                """
+я любил тебя больше, чем ангелов и самого,
+и поэтому дальше теперь от тебя, чем от них обоих;
+поздно ночью, в уснувшей долине, на самом дне,
+в городке, занесённом снегом по ручку двери,
+извиваясь ночью на простыне -
+как не сказано ниже по крайней мере -
+я взбиваю подушку мычащим "ты"
+за морями, которым конца и края,
+в темноте всем телом твои черты,
+как безумное зеркало повторяя.
+                """.trimIndent()
+        ))
         assertEquals("огда ", longestCommonSubstring(
                 """
 Мой дядя самых честных правил,
