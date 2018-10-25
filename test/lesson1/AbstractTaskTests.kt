@@ -83,7 +83,7 @@ abstract class AbstractTaskTests : AbstractFileTests() {
 
     protected fun sortTemperatures(sortTemperatures: (String, String) -> Unit) {
         try {
-            sortTemperatures("input/temp_in1.txt", "temp.txt")
+            sortTemperatures("Algorithms-2018/input/temp_in1.txt", "temp.txt")
             assertFileContent("temp.txt",
                     """
                     -98.4
@@ -99,7 +99,7 @@ abstract class AbstractTaskTests : AbstractFileTests() {
             File("temp.txt").delete()
         }
         try {
-            sortTemperatures("input/temp_in2.txt", "temp.txt")
+            sortTemperatures("Algorithms-2018/input/temp_in2.txt", "temp.txt")
             assertFileContent("temp.txt",
                     """
                    -18.0
@@ -130,7 +130,7 @@ abstract class AbstractTaskTests : AbstractFileTests() {
     protected fun sortSequence(sortSequence: (String, String) -> Unit) {
         // TODO: large test
         try {
-            sortSequence("input/seq_in1.txt", "temp.txt")
+            sortSequence("Algorithms-2018/input/seq_in1.txt", "temp.txt")
             assertFileContent("temp.txt",
                     """
                         1
@@ -145,7 +145,7 @@ abstract class AbstractTaskTests : AbstractFileTests() {
             File("temp.txt").delete()
         }
         try {
-            sortSequence("input/seq_in2.txt", "temp.txt")
+            sortSequence("Algorithms-2018/input/seq_in2.txt", "temp.txt")
             assertFileContent("temp.txt",
                     """
                         25
@@ -162,7 +162,7 @@ abstract class AbstractTaskTests : AbstractFileTests() {
             File("temp.txt").delete()
         }
         try {
-            sortSequence("input/seq_in3.txt", "temp.txt")
+            sortSequence("Algorithms-2018/input/seq_in3.txt", "temp.txt")
             assertFileContent("temp.txt",
                     """
                         15
@@ -182,7 +182,7 @@ abstract class AbstractTaskTests : AbstractFileTests() {
             File("temp.txt").delete()
         }
         try {
-            sortSequence("input/seq_in4.txt", "temp.txt")
+            sortSequence("Algorithms-2018/input/seq_in4.txt", "temp.txt")
             assertFileContent("temp.txt",
                     """
                         5
