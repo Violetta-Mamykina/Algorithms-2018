@@ -83,7 +83,7 @@ public class JavaAlgorithms {
      */
     //Трудоёмкость O(n)
     //Ресурсоёмкость O(n)
-    static public int josephTask(int menNumber, int choiceInterval) {
+    static public int josephTask(int menNumber, int choiceInterval) throws NotImplementedError{
         int result = 0;
         for (int i = 1; i <= menNumber; i++) {
             result = (result + choiceInterval) % i;
@@ -104,7 +104,7 @@ public class JavaAlgorithms {
      */
     //Трудоёмкость O(m*n)
     //Ресурсоёмкость O(n)
-    static public String longestCommonSubstring(String first, String second) {
+    static public String longestCommonSubstring(String first, String second) throws NotImplementedError{
         int[][] tableOfElements = new int[first.length()][second.length()];
         int lengthOfTheLongestSubstring = 0;
         String result = "";

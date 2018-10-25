@@ -141,44 +141,34 @@ public class JavaTasks {
      * 2
      * 2
      */
+    //Трудоёмкость O(n)
+    //Ресурсоёмкость O(n)
     static public void sortSequence(String inputName, String outputName) throws IOException {
         Map<String, Integer> numbers = new HashMap<>();
-        String lineOfNumbers;
-        String lineOfNumbers2;
-        int count;
         int maxCount = 0;
+        int minNumber = Integer.MAX_VALUE;
         String maxNumber = "";
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(inputName))) {
-            while ((lineOfNumbers = bufferedReader.readLine()) != null) {
-                if (numbers.containsKey(lineOfNumbers)) {
-                    count = numbers.get(lineOfNumbers);
-                    count++;
-                    numbers.put(lineOfNumbers, count);
-                } else {
-                    numbers.put(lineOfNumbers, 0);
-                }
-            }
-        }
+        List<String> input = Files.readAllLines(Paths.get(inputName));
+        input.forEach(i -> numbers.merge(i, 1, (a, b) -> a + b));
         for (Map.Entry<String, Integer> compareNumbers : numbers.entrySet()) {
             if (compareNumbers.getValue() > maxCount) {
                 maxCount = compareNumbers.getValue();
-                maxNumber = compareNumbers.getKey();
-            }
-        }
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(outputName));
-        try (BufferedReader bufferedReader2 = new BufferedReader(new FileReader(inputName))) {
-            while ((lineOfNumbers2 = bufferedReader2.readLine()) != null) {
-                if (!lineOfNumbers2.equals(maxNumber)) {
-                    bufferedWriter.write(lineOfNumbers2);
-                    bufferedWriter.newLine();
+                if (compareNumbers.getValue() < minNumber) {
+                    maxNumber = compareNumbers.getKey();
                 }
             }
-            for (int i = 0; i <= maxCount; i++) {
-                bufferedWriter.write(maxNumber);
-                bufferedWriter.newLine();
-            }
         }
-        bufferedWriter.close();
+        List<String> output = new ArrayList<>();
+        String finalMaxNumber = maxNumber;
+        input.forEach(i -> {
+            if (!i.equals(finalMaxNumber)) {
+                output.add(i);
+            }
+        });
+        for (int i = 0; i < maxCount; i++) {
+            output.add(maxNumber);
+        }
+        Files.write(Paths.get(outputName), output);
     }
 
 
