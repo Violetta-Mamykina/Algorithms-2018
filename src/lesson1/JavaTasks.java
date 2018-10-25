@@ -3,7 +3,10 @@ package lesson1;
 import kotlin.NotImplementedError;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @SuppressWarnings("unused")
 public class JavaTasks {
@@ -100,21 +103,13 @@ public class JavaTasks {
      * 121.3
      */
     //Трудоёмкость O(nlog(n))
+    //Ресурсоёмкость O(n)
     static public void sortTemperatures(String inputName, String outputName) throws IOException {
-        List<Double> listOfTemperatures = new ArrayList<>();
-        String lineOfTemperatures;
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(inputName))) {
-            while ((lineOfTemperatures = bufferedReader.readLine()) != null) {
-                listOfTemperatures.add(Double.valueOf(lineOfTemperatures));
-            }
-        }
-        Collections.sort(listOfTemperatures);
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(outputName));
-        for (Double aListOfTemperature : listOfTemperatures) {
-            bufferedWriter.write(Double.toString(aListOfTemperature));
-            bufferedWriter.newLine();
-        }
-        bufferedWriter.close();
+        List<String> input = Files.readAllLines(Paths.get(inputName));
+        List<Double> buffer = input.stream().map(Double::parseDouble).sorted().collect(Collectors.toList());
+
+        List<String> output = buffer.stream().map(String::valueOf).collect(Collectors.toList());
+        Files.write(Paths.get(outputName), output);
     }
 
     /**

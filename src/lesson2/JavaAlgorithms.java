@@ -81,9 +81,11 @@ public class JavaAlgorithms {
      * Х   Х
      * Х х Х
      */
+    //Трудоёмкость O(n)
+    //Ресурсоёмкость O(n)
     static public int josephTask(int menNumber, int choiceInterval) {
         int result = 0;
-        for (int i = 1; i <= menNumber; i++ ) {
+        for (int i = 1; i <= menNumber; i++) {
             result = (result + choiceInterval) % i;
         }
         return result + 1;
@@ -100,6 +102,8 @@ public class JavaAlgorithms {
      * Если имеется несколько самых длинных общих подстрок одной длины,
      * вернуть ту из них, которая встречается раньше в строке first.
      */
+    //Трудоёмкость O(m*n)
+    //Ресурсоёмкость O(n)
     static public String longestCommonSubstring(String first, String second) {
         int[][] tableOfElements = new int[first.length()][second.length()];
         int lengthOfTheLongestSubstring = 0;
@@ -133,21 +137,7 @@ public class JavaAlgorithms {
      * Единица простым числом не считается.
      */
     static public int calcPrimesNumber(int limit) {
-        int count = 0;
-        boolean check = true;
-        for (int i = 2; i <= limit; i++) {
-            for (int j = 2; j < i; j++) {
-                if (i % j == 0) {
-                    check = false;
-                    //System.out.println(check);
-                    break;
-                }
-            }
-            if (check) {
-                count++;
-            } else check = true;
-        }
-        return count;
+        throw new NotImplementedError();
     }
 
     /**
