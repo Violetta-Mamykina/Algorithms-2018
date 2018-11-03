@@ -103,7 +103,7 @@ public class JavaAlgorithms {
      * вернуть ту из них, которая встречается раньше в строке first.
      */
     //Трудоёмкость O(m*n)
-    //Ресурсоёмкость O(n)
+    //Ресурсоёмкость O(m*n)
     static public String longestCommonSubstring(String first, String second) throws NotImplementedError{
         int[][] tableOfElements = new int[first.length()][second.length()];
         int lengthOfTheLongestSubstring = 0;
