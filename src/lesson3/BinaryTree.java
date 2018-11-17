@@ -11,7 +11,7 @@ import java.util.*;
 public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implements CheckableSortedSet<T> {
 
     private static class Node<T> {
-        final T value;
+        T value;
 
         Node<T> left = null;
 
@@ -62,10 +62,41 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
      * Удаление элемента в дереве
      * Средняя
      */
+    //Ресурсоёмкость O(1)
+    //Трудоёмкость O(n)
     @Override
     public boolean remove(Object o) {
-        // TODO
-        throw new NotImplementedError();
+        root = remove(root, o);
+        size--;
+        return true;
+    }
+
+    public Node<T> remove(Node<T> root, Object o) {
+        if (root == null) return null;
+        if (o.equals(root.value)) {
+            if (root.left!=null && root.right!=null) {
+                root.value = searchMin(root.right);
+                root.right = remove(root.right, root.value);
+            }
+            else if (root.left != null) return root.left;
+            else return root.right;
+        }
+        T To = (T)o;
+        if (To.compareTo(root.value) < 0) root.left = remove(root.left, o);
+        else  root.right = remove(root.right, o);
+        return root;
+    }
+
+    private T searchMin(Node<T> node) {
+        T min = null;
+        if (node.left == null) return node.value;
+        else {
+            while (node.left != null) {
+                min = node.left.value;
+                node = node.left;
+            }
+        }
+        return min;
     }
 
     @Override
@@ -96,29 +127,45 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
 
     public class BinaryTreeIterator implements Iterator<T> {
 
-        private Node<T> current = null;
+        private Node<T> current;
+        Stack<Node<T>> stack = new Stack<Node<T>>();
+        Node<T> node = null;
 
         private BinaryTreeIterator() {
+            current = root;
+            while (current != null) {
+                stack.push(current);
+                current = current.left;
+            }
         }
 
         /**
          * Поиск следующего элемента
          * Средняя
          */
+        //Ресурсоёмкость O(n)
+        //Трудоёмкость O(1)
         private Node<T> findNext() {
-            // TODO
-            throw new NotImplementedError();
+            return stack.pop();
         }
 
         @Override
         public boolean hasNext() {
-            return findNext() != null;
+            return !stack.isEmpty();
         }
 
         @Override
         public T next() {
-            current = findNext();
+            current = stack.pop();
+            node = current;
             if (current == null) throw new NoSuchElementException();
+            if (node.right != null) {
+                node = node.right;
+                while (node != null) {
+                    stack.push(node);
+                    node = node.left;
+                }
+            }
             return current.value;
         }
 
@@ -126,12 +173,15 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
          * Удаление следующего элемента
          * Сложная
          */
+        //Ресурсоёмкость O(1)
+        //Трудоёмкость O(n)
         @Override
         public void remove() {
-            // TODO
-            throw new NotImplementedError();
+            root = BinaryTree.this.remove(root, current.value);
+            size--;
         }
     }
+
 
     @NotNull
     @Override
@@ -163,6 +213,7 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
     }
 
     SortedSet<T> resultSet = new TreeSet<>();
+
     public void addToSet(SortedSet<T> set, Node<T> value) {
         set.add(value.value);
         if (value.left != null) {
@@ -212,7 +263,7 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
         return resultSet;
     }
 
-    public void findTailSet(SortedSet<T> set, Node<T> value, T fromElement){
+    public void findTailSet(SortedSet<T> set, Node<T> value, T fromElement) {
         int compare = value.value.compareTo(fromElement);
         if (compare >= 0) {
             set.add(value.value);
