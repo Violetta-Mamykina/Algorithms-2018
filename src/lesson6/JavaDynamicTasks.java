@@ -1,14 +1,12 @@
 package lesson6;
 
 import kotlin.NotImplementedError;
-import kotlin.Pair;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.stream.IntStream;
 
 import static java.lang.Math.*;
 
@@ -44,31 +42,33 @@ public class JavaDynamicTasks {
     //Трудоёмкость O(n^2)
     //Ресурсоёмкость O(n)
     public static List<Integer> longestIncreasingSubSequence(List<Integer> list) {
-        if (list.size() == 0 || list.size() == 1) return list;
-        int max = 0;
-        int start[] = new int[list.size()];
-        Arrays.fill(start, -1);
-        int sizeOfSubsequence[] = new int[list.size()];
-        Arrays.fill(sizeOfSubsequence, 1);
-        for (int i = 1; i < list.size(); i++) {
+        int listSize = list.size();
+        if (listSize == 0 || listSize == 1) return list;
+        int[] start = IntStream.generate(() -> -1).limit(listSize).toArray();
+        int[] sizeOfSubsequence = Arrays.copyOf(start, listSize);
+        int position = 0;
+        int maxLength = sizeOfSubsequence[0];
+        for (int i = 0; i < listSize; i++) {
             for (int j = 0; j < i; j++) {
                 if (list.get(i) > list.get(j) && sizeOfSubsequence[i] <= sizeOfSubsequence[j]) {
                     start[i] = j;
                     sizeOfSubsequence[i] = sizeOfSubsequence[j] + 1;
-                    max = (sizeOfSubsequence[max] < sizeOfSubsequence[i]) ? i : max;
+                    if (sizeOfSubsequence[i] > maxLength) {
+                        position = i;
+                        maxLength = sizeOfSubsequence[i];
+                    }
                 }
             }
         }
-        int count = sizeOfSubsequence[max];
-        int result[] = new int[count];
-        int it = max;
-        while (it != -1) {
-            result[--count] = list.get(it);
-            it = start[it];
+        List<Integer> result = new ArrayList<>();
+        while (position != -1) {
+            result.add(list.get(position));
+            position = start[position];
         }
-        return Arrays.stream(result).boxed().collect(Collectors.toList());
+        Collections.reverse(result);
+        return result;
     }
-
+    
     /**
      * Самый короткий маршрут на прямоугольном поле.
      * Сложная
