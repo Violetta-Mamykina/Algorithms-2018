@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static java.lang.Math.*;
 
@@ -92,23 +93,20 @@ public class JavaDynamicTasks {
     //Трудоёмкость O(m*n)
     //Ресурсоёмкость O(m*n)
     public static int shortestPathOnField(String inputName) throws IOException {
-        List<String> inputFile = Files.readAllLines(Paths.get(inputName));
-        List<String> input = new ArrayList<>();
-        for (String line : inputFile) input.add(line.replaceAll("\\s+", ""));
-        final int CONST = 48;
-        int width = input.size();
-        int length = input.get(0).length();
-        int field[][] = new int[width][length];
-        field[0][0] = input.get(0).charAt(0) - CONST;
-        for (int i = 1; i < width; i++) field[i][0] = field[i - 1][0] + input.get(i).charAt(0) - CONST;
-        for (int i = 1; i < length; i++) field[0][i] = field[0][i - 1] + input.get(0).charAt(i) - CONST;
-        for (int i = 1; i < length; i++) {
-            for (int j = 1; j < width; j++) {
-                int min = min(min(field[j - 1][i], field[j][i - 1]), field[j - 1][i - 1]);
-                field[j][i] = min + input.get(j).charAt(i) - CONST;
+        List<String> lines = Files.readAllLines(Paths.get(inputName));
+        int height = lines.size();
+        int width = lines.get(0).split("\\s+").length;
+        int[][] field = IntStream.range(0, height).mapToObj(i ->
+                Stream.of(lines.get(i).split("\\s+")).mapToInt(Integer::parseInt).toArray()).toArray(int[][]::new);
+        IntStream.range(1, height).forEachOrdered(i -> field[i][0] = field[i - 1][0] + field[i][0]);
+        IntStream.range(1, width).forEachOrdered(i -> field[0][i] = field[0][i - 1] + field[0][i]);
+        for (int y = 1; y < height; y++) {
+            for (int x = 1; x < width; x++) {
+                int minimal = min(Math.min(field[y - 1][x], field[y][x - 1]), field[y - 1][x - 1]);
+                field[y][x] += minimal;
             }
         }
-        return field[width - 1][length - 1];
+        return field[height - 1][width - 1];
     }
 
     // Задачу "Максимальное независимое множество вершин в графе без циклов"
